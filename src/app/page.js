@@ -294,7 +294,7 @@ export default function ProductPage() {
     <h3 className="text-lg font-semibold text-gray-900 mb-3">Our Policy</h3>
     <p className="text-sm text-gray-600">
       We operate as a dropshipping store in partnership with HHC, a trusted fulfillment provider. 
-      While we don't physically stock inventory, all products are quality-checked and shipped 
+      While we don&apos;t physically stock inventory, all products are quality-checked and shipped 
       directly from certified warehouses to ensure you receive genuine items as described.
     </p>
   </div>
