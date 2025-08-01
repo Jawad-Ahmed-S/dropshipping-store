@@ -67,8 +67,6 @@ const handleOrderSubmit = async (e) => {
       <Head>
   <title>{product.title}</title>
   <meta name="description" content={product.description} />
-
-  {/* ✅ Meta Pixel Script */}
   <script
     dangerouslySetInnerHTML={{
       __html: `
@@ -80,23 +78,22 @@ const handleOrderSubmit = async (e) => {
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '756944570620895'); 
+        fbq('init', '756944570620895');
         fbq('track', 'PageView');
       `,
     }}
   />
 
-  {/* ✅ Fallback for users with JavaScript disabled */}
   <noscript>
     <img
       height="1"
       width="1"
       style={{ display: 'none' }}
       src="https://www.facebook.com/tr?id=756944570620895&ev=PageView&noscript=1"
+      alt=""
     />
   </noscript>
 </Head>
-
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row gap-12">
           {/* Product Image Gallery */}
