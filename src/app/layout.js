@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-const FacebookPixel = dynamic(import('../components/FacebookPixel'));
+const FacebookPixel = import('../components/FacebookPixel');
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
