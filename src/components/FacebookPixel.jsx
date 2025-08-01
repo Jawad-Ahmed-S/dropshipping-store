@@ -1,14 +1,12 @@
 'use client';
-import Image from 'next/image';
 import Script from 'next/script';
 
-const PixelTracker = () => {
+export default function FacebookPixel() {
   return (
     <>
-     
       <Script
-        strategy="afterInteractive"
         id="facebook-pixel"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             !function(f,b,e,v,n,t,s) {
@@ -28,20 +26,20 @@ const PixelTracker = () => {
             }(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
 
-            fbq('init', process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID);
+            fbq('init', '756944570620895');
             fbq('track', 'PageView');
-          `
+          `,
         }}
       />
       <noscript>
-        <Image
+        <img
           alt="facebook-pixel"
-          height={1}
-          width={1}
+          height="1"
+          width="1"
           style={{ display: 'none' }}
-          src={`https://www.facebook.com/tr?id=756944570620895&ev=PageView&noscript=1`}
+          src="https://www.facebook.com/tr?id=756944570620895&ev=PageView&noscript=1"
         />
       </noscript>
     </>
   );
-};
+}
