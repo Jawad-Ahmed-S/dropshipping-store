@@ -67,6 +67,7 @@ const handleOrderSubmit = async (e) => {
       <Head>
   <title>{product.title}</title>
   <meta name="description" content={product.description} />
+
   <script
     dangerouslySetInnerHTML={{
       __html: `
