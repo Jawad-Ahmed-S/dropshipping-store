@@ -406,144 +406,191 @@ const handleOrderSubmit = async (e) => {
 
       {/* Order Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4 z-50 overflow-y-auto">
-          <div 
-            className="bg-white rounded-xl w-full max-w-md mx-auto my-8 p-6 relative"
-            onClick={(e) => e.stopPropagation()}
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
+  <div 
+    className="bg-white rounded-xl w-full max-w-5xl mx-auto my-8 relative overflow-hidden"
+    onClick={(e) => e.stopPropagation()}
+  >
+    <button 
+      onClick={() => {
+        setShowForm(false);
+        setSuccess(false); // Reset success state when closing modal
+      }}
+      className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10 bg-white/80 backdrop-blur-sm rounded-full p-2"
+    >
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    {/* Conditional rendering for success message or form */}
+    {success ? (
+      <div className="text-center py-20">
+        <div className="max-w-md mx-auto">
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-green-600 mb-2">Thank you!</h2>
+          <p className="text-gray-700 mb-8">Your order has been placed successfully.</p>
+          <button
+            onClick={() => {
+              setShowForm(false);
+              setSuccess(false);
+            }}
+            className="bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
           >
-            <button 
-              onClick={() => {
-                setShowForm(false);
-                setSuccess(false); // Reset success state when closing modal
-              }}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            Close
+          </button>
+        </div>
+      </div>
+    ) : (
+      <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+        {/* Left Column - Form */}
+        <div className="p-6 lg:p-8 flex flex-col justify-center items-center">
+          <h2 className="text-xl font-normal text-gray-900 mb-6">Complete Your Order</h2>
+          
+          <form 
+            onSubmit={handleOrderSubmit}
+            className="space-y-4">
+            <div className="space-y-4">
+              <input type="hidden" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder-gray-400" name="product_name" value={product.title} />
+              <input type="hidden" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder-gray-400" name="quantity" value={quantity} />
+              <input type="hidden" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder-gray-400" name="total_price" value={`Rs. ${product.discountPrice * quantity}`} />
+              <input type="hidden" className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500 placeholder-gray-400" name="_redirect" value="#" />
+              
+              {/* Name and Email Row */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
+                  />
+                </div>
 
-            {/* Conditional rendering for success message or form */}
-            {success ? (
-              <div className="text-center py-10">
-                <h2 className="text-2xl font-bold text-green-600 mb-2">Thank you!</h2>
-                <p className="text-gray-700">Your order has been placed successfully.</p>
-                <button
-                  onClick={() => {
-                    setShowForm(false);
-                    setSuccess(false);
-                  }}
-                  className="mt-6 bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
-                >
-                  Close
-                </button>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email {<span className='font-bold'>(Optional)</span>}</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
+                  />
+                </div>
               </div>
-            ) : (
-              <>
-                <h2 className="text-xl font-light text-gray-900 mb-6">Complete Your Order</h2>
-                
-                <form 
-                  onSubmit={handleOrderSubmit}
-                  className="max-h-[80vh] overflow-y-auto pr-2">
-                  <div className="space-y-4">
-                    <input type="hidden" name="product_name" value={product.title} />
-                    <input type="hidden" name="quantity" value={quantity} />
-                    <input type="hidden" name="total_price" value={`Rs. ${product.discountPrice * quantity}`} />
-                    <input type="hidden" name="_redirect" value="#" />
-                    <div>
 
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
-                      />
-                    </div>
+              {/* Phone Number */}
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
+                />
+              </div>
 
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
-                      />
-                    </div>
+              {/* Shipping Address */}
+              <div>
+                <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">Shipping Address</label>
+                <textarea
+                  id="address"
+                  name="address"
+                  required
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
+                />
+              </div>
 
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">Shipping Address</label>
-                      <textarea
-                        id="address"
-                        name="address"
-                        required
-                        rows={3}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-gray-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Payment Method</label>
-                      <div className="space-y-2">
-                        <div className="flex items-center">
-                          <input
-                            id="cod"
-                            name="payment"
-                            type="radio"
-                            defaultChecked
-                            className="h-4 w-4 text-gray-600 focus:ring-gray-500"
-                          />
-                          <label htmlFor="cod" className="ml-2 block text-sm text-gray-700">
-                            Cash on Delivery (COD)
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="pt-2">
-                      <div className="flex justify-between border-t border-gray-200 pt-4 mb-4">
-                        <span className="text-sm font-medium text-gray-700">Quantity</span>
-                        <span className="text-sm text-gray-900">{quantity}</span>
-                      </div>
-                      </div>
-                    <div className="pt-2">
-                      <div className="flex justify-between border-t border-gray-200 pt-4 mb-4">
-                        <span className="text-sm font-medium text-gray-700">Subtotal</span>
-                        <span className="text-sm text-gray-900">Rs. {product.discountPrice * quantity}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm font-medium text-gray-700">Shipping</span>
-                        <span className="text-sm text-green-600">Free</span>
-                      </div>
-                      <div className="flex justify-between border-t border-gray-200 pt-4 mt-4">
-                        <span className="text-base font-medium text-gray-900">Total</span>
-                        <span className="text-base font-medium text-gray-900">Rs. {product.discountPrice * quantity}</span>
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="w-full bg-gray-900 text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors font-medium mt-4"
-                    >
-                      Place Order
-                    </button>
+              {/* Payment Method */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Payment Method</label>
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <div className="flex items-center">
+                    <input
+                      id="cod"
+                      name="payment"
+                      type="radio"
+                      defaultChecked
+                      className="h-4 w-4 text-gray-600 focus:ring-gray-500"
+                    />
+                    <label htmlFor="cod" className="ml-2 block text-sm text-gray-700">
+                      Cash on Delivery (COD)
+                    </label>
                   </div>
-                </form>
-              </>
-            )}
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        {/* Right Column - Order Summary Card */}
+        <div className="bg-gray-50 lg:flex flex-col justify-center items-center p-6 lg:p-8 hidden">
+          <div className="w-full max-w-sm">
+            {/* Order Summary Card */}
+            <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Order Summary</h3>
+              
+              {/* Product Preview */}
+              <div className="flex items-center space-x-3 mb-4 pb-4 border-b border-gray-100">
+                <div className="w-16 h-16 bg-gray-100 rounded-lg shadow-lg flex items-center overflow-hidden justify-center">
+                  
+  <Image 
+    src="/product/main.jpeg" 
+    alt="Product" 
+    width={64}
+    height={64}
+    className="w-full h-full object-cover"
+  />
+
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-900 line-clamp-2">{product?.title || 'Product Name'}</p>
+                  <p className="text-xs text-gray-500">Qty: {quantity}</p>
+                </div>
+              </div>
+              
+              {/* Price Breakdown */}
+              <div className="space-y-3 mb-4">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Subtotal</span>
+                  <span className="text-gray-900">Rs. {product?.discountPrice ? product.discountPrice * quantity : '0'}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Shipping</span>
+                  <span className="text-green-600 font-medium">Free</span>
+                </div>
+                <div className="border-t border-gray-100 pt-3">
+                  <div className="flex justify-between">
+                    <span className="text-base font-semibold text-gray-900">Total</span>
+                    <span className="text-lg font-bold text-gray-900">Rs. {product?.discountPrice ? product.discountPrice * quantity : '0'}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Payment & Shipping Card */}
+            
+            {/* Place Order Button */}
+            <button
+              type="button"
+              className="w-full bg-gray-900 text-white py-4 px-6 rounded-xl hover:bg-gray-800 transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              onClick={() => document.querySelector('form').requestSubmit()}
+            >
+              Place Order
+            </button>
           </div>
         </div>
+      </div>
+    )}
+  </div>
+</div>
       )}
     </div>
     </>
