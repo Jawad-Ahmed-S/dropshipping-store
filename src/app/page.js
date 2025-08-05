@@ -37,7 +37,7 @@ const handleOrderSubmit = async (e) => {
 
   // Meta Pixel tracking
   if (typeof window.fbq !== 'undefined') {
-    fbq('track', 'Lead');  // or 'Purchase' if you prefer
+    fbq('track', 'Ordered');
   }
 
   const form = e.target;
@@ -179,9 +179,9 @@ const handleOrderSubmit = async (e) => {
               <div className="flex flex-col sm:flex-row gap-3 mb-8">
                 <button
   onClick={() => {
-    if (typeof window.fbq !== 'undefined') {
-      fbq('trackCustom', 'OrderNowClicked');
-    }
+    // if (typeof window.fbq !== 'undefined') {
+    //   fbq('trackCustom', 'OrderNowClicked');
+    // }
     setShowForm(true); // existing popup logic
   }}
   className="flex-1 bg-gray-900 text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors font-medium"
@@ -196,9 +196,9 @@ const handleOrderSubmit = async (e) => {
     className="flex-1"
     aria-label="Chat on WhatsApp"
     onClick={() => {
-      if (typeof window.fbq !== 'undefined') {
-        fbq('trackCustom', 'WhatsAppChatStarted');
-      }
+      // if (typeof window.fbq !== 'undefined') {
+      //   fbq('trackCustom', 'WhatsAppChatStarted');
+      // }
     }}
   >
     <button
