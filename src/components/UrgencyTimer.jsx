@@ -49,9 +49,9 @@ export default function UrgencyTimer() {
 
   return (
     <div className="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-400 text-white px-6 py-4 rounded-xl shadow-lg w-full max-w-xl mx-auto my-6 flex flex-col sm:flex-row justify-between items-center animate-pulse hover:animate-none transition-all duration-300">
-      <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-0">
-        ⚡ Limited Time Offer Ends In:
-      </div>
+      <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-0 whitespace-nowrap">
+   Limited Time Offer Ends In:
+</div>
       <div className="font-mono text-2xl sm:text-3xl bg-white text-red-600 rounded px-4 py-2 tracking-widest shadow-inner">
         {hours}:{minutes}:{seconds}
       </div>

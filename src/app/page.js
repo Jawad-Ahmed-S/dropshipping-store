@@ -24,11 +24,11 @@ export default function ProductPage() {
     discountPrice: 1190,
     description: " Transform your garden hose into a powerful cleaning tool with adjustable spray patterns for versatile outdoor use.",
     images: [
-      { id: 1, src: "/product/main.jpeg", alt: "Product size reference" },
-      { id: 2, src: "/product/size.webp", alt: "Premium watch main view" },
-      { id: 3, src: "/product/modes.jpg", alt: "Watch display modes" },
-      { id: 4, src: "/product/main.jpeg", alt: "Watch close-up detail" },
-      { id: 5, src: "/product/size.webp", alt: "Product packaging" }
+      { id: 1, src: "/product/main.jpeg", alt: "main product picture" },
+      { id: 2, src: "/product/modes.jpg", alt: "product pic1" },
+      { id: 3, src: "/product/big1.webp", alt: "water nozzel modes" },
+      { id: 4, src: "/product/big2.webp", alt: "product pic1" },
+      { id: 5, src: "/product/size.webp", alt: "Product packaging & sizing" }
     ]
   };
 
@@ -116,7 +116,7 @@ const handleOrderSubmit = async (e) => {
                   <button
                     key={image.id}
                     onClick={() => setSelectedImage(index)}
-                    className={`aspect-square bg-gray-50 rounded-md overflow-hidden relative transition-all ${
+                    className={`aspect-square cursor-pointer bg-gray-50 rounded-md overflow-hidden relative transition-all ${
                       selectedImage === index 
                         ? 'ring-2 ring-gray-400 scale-105' 
                         : 'hover:ring-1 hover:ring-gray-200'
@@ -161,14 +161,14 @@ const handleOrderSubmit = async (e) => {
                 <div className="flex items-center border border-gray-200 rounded-md w-min">
                   <button 
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="px-3 py-1 text-gray-600 hover:bg-gray-50"
+                    className="px-3 py-1 cursor-pointer text-gray-600 hover:bg-gray-100"
                   >
                     -
                   </button>
                   <span className="px-4 py-1 text-gray-900">{quantity}</span>
                   <button 
                     onClick={() => setQuantity(quantity + 1)}
-                    className="px-3 py-1 text-gray-600 hover:bg-gray-50"
+                    className="px-3 py-1 cursor-pointer text-gray-600 hover:bg-gray-100"
                   >
                     +
                   </button>
@@ -184,7 +184,7 @@ const handleOrderSubmit = async (e) => {
     // }
     setShowForm(true); // existing popup logic
   }}
-  className="flex-1 bg-gray-900 text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors font-medium"
+  className="flex-1 bg-gray-900 cursor-pointer text-white py-3 px-6 rounded-md hover:bg-gray-800 transition-colors font-medium"
 >
   Order Now
 </button>
@@ -203,7 +203,7 @@ const handleOrderSubmit = async (e) => {
   >
     <button
       type="button"
-      className="w-full bg-green-600 text-white py-3 px-6 rounded-md hover:bg-green-700 transition-colors font-medium flex items-center justify-center gap-2"
+      className="w-full bg-green-600 text-white py-3 cursor-pointer px-6 rounded-md hover:bg-green-700 transition-colors font-medium flex items-center justify-center gap-2"
     >
       <svg
         className="w-5 h-5"
@@ -229,7 +229,7 @@ const handleOrderSubmit = async (e) => {
     <h3 className="font-bold text-gray-800 mb-2">SPECIFICATIONS</h3>
     <ul className="text-gray-600 text-sm space-y-1">
       <li>• Color: Black</li>
-      <li>• Material: ABS Plastic</li>
+      <li>• Material: Plastic</li>
       <li>• Weight: 0.1 kg</li>
     </ul>
   </div>
@@ -280,20 +280,35 @@ const handleOrderSubmit = async (e) => {
   </div>
 
   {/* Usage Instructions */}
-  <div>
-    <h3 className="font-bold text-gray-800 mb-4">HOW TO USE</h3>
-    <ol className="space-y-3 list-decimal list-inside">
-      <li className="text-gray-700">
-        <span className="font-medium">Attach the nozzle:</span> Insert into hose pipe
-      </li>
-      <li className="text-gray-700">
-        <span className="font-medium">Secure connection:</span> Tighten with clamp
-      </li>
-      <li className="text-gray-700">
-        <span className="font-medium">Adjust modes:</span> Rotate front collar to select
-      </li>
-    </ol>
-  </div>
+ <div >
+  <h3 className="font-bold text-center text-gray-800 mb-6">HOW TO USE</h3>
+  <ol className="space-y-4 list-none text-left inline-block max-w-md">
+    <li className="text-gray-700 flex items-start">
+      <span className="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">1</span>
+      <div>
+        <span className="font-bold">Attach the nozzle:</span>
+        
+        <span className="text-sm">Insert into hose pipe.</span>
+      </div>
+    </li>
+    <li className="text-gray-700 flex items-start">
+      <span className="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">2</span>
+      <div>
+        <span className="font-bold">Secure connection:</span>
+        
+        <span className="text-sm">Tighten with clamp.</span>
+      </div>
+    </li>
+    <li className="text-gray-700 flex items-start">
+      <span className="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">3</span>
+      <div>
+        <span className="font-bold">Adjust modes:</span>
+        
+        <span className="text-sm">Rotate front collar to select.</span>
+      </div>
+    </li>
+  </ol>
+</div>
 </div>
 </div>
 </div>  
@@ -377,27 +392,32 @@ const handleOrderSubmit = async (e) => {
 
 </div>  
         </section>
-        <footer className="bg-gray-50 border-t border-gray-200 py-8 mt-12">
+       <footer className="bg-gray-50 border-t border-gray-200 py-6 mt-12">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex flex-col md:flex-row justify-center items-center">
+    <div className="flex flex-col justify-center items-center text-center space-y-4">
       
-     <div className="mb-4 md:mb-0 flex items-center text-sm text-gray-500">
-  © {new Date().getFullYear()}
-  <Image src="/logo.png" alt="Logo" width={100} height={100} className="mx-2" />
-  All rights reserved.
-</div>
+      {/* Logo and Copyright - Mobile Optimized */}
+      <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-3">
+        <Image 
+          src="/logo.png" 
+          alt="Logo" 
+          width={100} 
+          height={100} 
+          className="mx-2"
+        />
+        <div className="text-sm text-gray-500">
+          <span>© {new Date().getFullYear()} All rights reserved.</span>
+        </div>
+      </div>
 
-
-
+      {/* Policy Note - Mobile Optimized */}
+      <div className="max-w-md mx-auto">
+        <p className="text-xs text-gray-400 leading-relaxed px-2">
+          Note: We operate as a dropshipping store in partnership with HHC fulfillment. 
+          Products ship directly from certified warehouses.
+        </p>
+      </div>
       
-    </div>
-
-    {/* Policy Note - Dropshipping Disclosure */}
-    <div className="mt-6 text-center md:text-left">
-      <p className="text-xs text-gray-400">
-        Note: We operate as a dropshipping store in partnership with HHC fulfillment. 
-        Products ship directly from certified warehouses.
-      </p>
     </div>
   </div>
 </footer>
@@ -416,7 +436,7 @@ const handleOrderSubmit = async (e) => {
         setShowForm(false);
         setSuccess(false); // Reset success state when closing modal
       }}
-      className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10 bg-white/80 backdrop-blur-sm rounded-full p-2"
+      className="absolute top-4 right-4 cursor-pointer text-gray-500 hover:text-gray-700 z-10 bg-white/80 backdrop-blur-sm rounded-full p-2"
     >
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -439,7 +459,7 @@ const handleOrderSubmit = async (e) => {
               setShowForm(false);
               setSuccess(false);
             }}
-            className="bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
+            className="bg-gray-900 cursor-pointer text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors"
           >
             Close
           </button>
@@ -580,7 +600,8 @@ const handleOrderSubmit = async (e) => {
             {/* Place Order Button */}
             <button
               type="button"
-              className="w-full bg-gray-900 text-white py-4 px-6 rounded-xl hover:bg-gray-800 transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              // cursor="pointer"
+              className="w-full bg-gray-900 cursor-pointer text-white py-4 px-6 rounded-xl hover:bg-gray-800 transition-all duration-200 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               onClick={() => document.querySelector('form').requestSubmit()}
             >
               Place Order
