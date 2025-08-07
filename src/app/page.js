@@ -18,8 +18,8 @@ export default function ProductPage() {
 
   const product = {
     title: "3-in-1 High Pressure Water Spray Nozzel",
-    price: 1399,
-    discountPrice: 1190,
+    price: 1130,
+    discountPrice: 795,
     description: " Transform your garden hose into a powerful cleaning tool with adjustable spray patterns for versatile outdoor use.",
     images: [
       { id: 1, src: "/product/main.jpeg", alt: "Product size reference" },
